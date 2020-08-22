@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextInfo>
+	<context key="Funding">
+    	<value>Self Funded</value>
+  	</context>
+  	<context key="Mode of Entry">
+    	<value>Admission Test</value>
+  	</context> 
+  	<context key="University">
+    	<value>UoM</value>
+  	</context> 
+  	<context key="Course">
+    	<value>Law</value>
+  	</context> 
+ </contextInfo>

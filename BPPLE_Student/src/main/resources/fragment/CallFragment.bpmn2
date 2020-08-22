@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.3.3.Final-v20170221-1647-B60" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_1Frag" isCollection="false" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2Frag" isCollection="false" structureRef="java.lang.Object"/>
+  <bpmn2:itemDefinition id="ItemDefinition_1" isCollection="false" structureRef="Object"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2" isCollection="false" structureRef="Object"/>
+  <bpmn2:process id="defaultPackage.CallFragment" tns:packageName="defaultPackage" name="CallFragment" isExecutable="true" processType="Private">
+    <bpmn2:startEvent id="StartEvent_1Frag" name="StartProcess">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[StartProcess]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlow_1Frag</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="ScriptTask_1Frag" name="Script Task 1" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Script Task 1]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1Frag</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2Frag</bpmn2:outgoing>
+      <bpmn2:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1Frag" tns:priority="1" sourceRef="StartEvent_1Frag" targetRef="ScriptTask_1Frag"/>
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1Frag" tns:ruleFlowGroup="Group2" name="Business Rule Task 1" implementation="##unspecified">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Business Rule Task 1]]></tns:metaValue>
+        </tns:metaData>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+System.out.println(&quot;executing business rules&quot;);</tns:script>
+        </tns:onEntry-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_2Frag</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3Frag</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_2Frag" tns:priority="1" sourceRef="ScriptTask_1Frag" targetRef="BusinessRuleTask_1Frag"/>
+    <bpmn2:task id="Task_1Frag" tns:taskName="BindFragmentModel" tns:displayName="BindFragmentModel" tns:icon="task.png" name="Call Activity">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Call Activity]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_3Frag</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4Frag</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_1Frag">
+        <bpmn2:inputSet id="_InputSet_2Frag"/>
+        <bpmn2:outputSet id="OutputSet_1Frag" name="Output Set 1"/>
+      </bpmn2:ioSpecification>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_3Frag" tns:priority="1" sourceRef="BusinessRuleTask_1Frag" targetRef="Task_1Frag"/>
+    <bpmn2:endEvent id="EndEvent_1Frag" name="End Event 1Frag">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[End Event 1Frag]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_4Frag</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_4Frag" tns:priority="1" sourceRef="Task_1Frag" targetRef="EndEvent_1Frag"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1Frag">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1Frag" bpmnElement="defaultPackage.CallFragment">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1Frag" bpmnElement="StartEvent_1Frag">
+        <dc:Bounds height="0.0" width="0.0" x="45.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_1">
+          <dc:Bounds height="15.0" width="71.0" x="28.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1Frag" bpmnElement="ScriptTask_1Frag" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="120.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_2">
+          <dc:Bounds height="15.0" width="71.0" x="139.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_1Frag" bpmnElement="BusinessRuleTask_1Frag" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="300.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_3">
+          <dc:Bounds height="30.0" width="91.0" x="309.0" y="48.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_1Frag" bpmnElement="Task_1Frag" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="463.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_4">
+          <dc:Bounds height="15.0" width="60.0" x="488.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1Frag" bpmnElement="EndEvent_1Frag">
+        <dc:Bounds height="36.0" width="36.0" x="632.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_5">
+          <dc:Bounds height="30.0" width="71.0" x="615.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1Frag" bpmnElement="SequenceFlow_1Frag" sourceElement="BPMNShape_StartEvent_1Frag" targetElement="BPMNShape_ScriptTask_1Frag">
+        <di:waypoint xsi:type="dc:Point" x="81.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="100.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="120.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_6"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2Frag" bpmnElement="SequenceFlow_2Frag" sourceElement="BPMNShape_ScriptTask_1Frag" targetElement="BPMNShape_BusinessRuleTask_1Frag">
+        <di:waypoint xsi:type="dc:Point" x="230.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="265.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="300.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_7"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3Frag" bpmnElement="SequenceFlow_3Frag" sourceElement="BPMNShape_BusinessRuleTask_1Frag" targetElement="BPMNShape_Task_1Frag">
+        <di:waypoint xsi:type="dc:Point" x="410.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="436.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="463.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_8"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4Frag" bpmnElement="SequenceFlow_4Frag" sourceElement="BPMNShape_Task_1Frag" targetElement="BPMNShape_EndEvent_1Frag">
+        <di:waypoint xsi:type="dc:Point" x="573.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="602.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="632.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_9"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

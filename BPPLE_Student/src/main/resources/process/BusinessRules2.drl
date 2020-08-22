@@ -1,0 +1,109 @@
+//created on: 10-May-2019
+package com.sample
+
+//list any import classes here.
+import org.kie.api.runtime.process.WorkflowProcessInstance;
+import com.sample.ContextInfo;
+import com.sample.XMLDOMHelper;
+import java.util.HashMap;
+import java.util.Map;
+
+
+//declare any global variables here
+
+
+rule "Admission Test  Self Funding  Admission Test  Manchester  Law2"
+ruleflow-group "Group2"
+    when
+    	$process : WorkflowProcessInstance( )
+    	//$ci : ContextInfo() from (ContextInfo)$process.getVariable("contextInfo")
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Admission Test" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+        //eval (true)
+        $ci : ContextInfo(abstractContainerAttrValue == "Admission Test" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law") from (ContextInfo)$process.getVariable("contextInfo");
+        //eval (true)
+        //eval ($ci.getAbstractContainerAttrValue() == "Admission Test" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	//System.out.println( "RULE EXECUTING: " + ($ci.getAbstractContainerAttrValue() == "Admission Test" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law") );
+    	//System.out.println("the funding type: " + $map.get("Funding") );
+    	System.out.println("UNIVERSITY :" + $ci.getContextList().get("Course") );
+    	$process.setVariable( "fragmentID", "defaultPackage.AdmissionTest" );
+    	//$ci.setFragFilePath("C:\\Users\\eleon\\eclipse-workspace\\BPPL\\src\\main\\resources\\process\\AdmissionTest.bpmn2");
+        System.out.println( "fragment file path is set" );
+        
+end
+
+rule "Verify Transcript  Self Funding  Admission Test  Manchester  Law2"
+ruleflow-group "Group2"
+    when
+    	$process : WorkflowProcessInstance( )
+    	//$ci : ContextInfo() from (ContextInfo)$process.getVariable("contextInfo")
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Veryfy Transcript" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Verify Transcript" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law") from (ContextInfo)$process.getVariable("contextInfo");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Verify Transcript" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$process.setVariable( "fragmentID", "defaultPackage.Dumb" );
+    	//$ci.setFragFilePath("");
+        System.out.println( "fragment file path is set 2" );
+        
+end
+
+rule "Transfer Credit  Admission Test  Self Funding  Admission Test  Manchester  Law2"
+ruleflow-group "Group2"
+    when
+    	$process : WorkflowProcessInstance( )
+    	//$ci : ContextInfo() from (ContextInfo)$process.getVariable("contextInfo")
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Transder Credit" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Transfer Credit" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law") from (ContextInfo)$process.getVariable("contextInfo");
+        //$ci : ContextInfo()
+        eval ($ci.getAbstractContainerAttrValue() == "Transfer Credit" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$process.setVariable( "fragmentID", "defaultPackage.Dumb" );
+    	//$ci.setFragFilePath("");
+        System.out.println( "fragment file path is set 3" );
+        
+end
+
+rule "Funding  Admission Test  Self Funding  Admission Test  Manchester + Law2"
+ruleflow-group "Group2"
+    when
+    	$process : WorkflowProcessInstance( )
+    	//$ci : ContextInfo() from (ContextInfo)$process.getVariable("contextInfo")
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Funding" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Funding" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law") from (ContextInfo)$process.getVariable("contextInfo");
+        //$ci : ContextInfo()
+        //eval(true)
+        //eval ($ci.getAbstractContainerAttrValue() == "Funding" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	System.out.println( "fragment is set 4" );
+    	$process.setVariable( "fragmentID", "defaultPackage.SelfFinancing" );
+    	//$ci.setFragFilePath("C:\\Users\\eleon\\eclipse-workspace\\BPPL\\src\\main\\resources\\process\\SelfFinancing.bpmn2");
+        System.out.println( "fragment file path is set 4 j=====" + $ci.getContextValueByKey("Funding"));
+        
+end
+
+rule "Tuition  Admission Test  Self Funding  Admission Test  Manchester  Law2"
+ruleflow-group "Group2"
+    when
+    	$process : WorkflowProcessInstance( )
+    	//$ci : ContextInfo() from (ContextInfo)$process.getVariable("contextInfo")
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Tuition" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Tuition" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law") from (ContextInfo)$process.getVariable("contextInfo");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Tuition" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$process.setVariable( "fragmentID", "defaultPackage.PayTuition" );
+    	//$ci.setFragFilePath("C:\\Users\\eleon\\eclipse-workspace\\BPPL\\src\\main\\resources\\process\\PayTuition.bpmn2");
+        System.out.println( "fragment file path is set 5" );
+        
+end

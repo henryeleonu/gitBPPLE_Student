@@ -1,0 +1,30 @@
+import org.drools.core.process.core.datatype.impl.type.StringDataType;
+import org.drools.core.process.core.datatype.impl.type.ObjectDataType;
+[
+  // the PauseNode work item
+  [
+    "name" : "PauseNode",
+    "parameters" : [
+      "Message" : new StringDataType(),
+     
+    ],
+    
+    "displayName" : "PauseNode"
+  ]
+]
+[
+  // the BindFragmentModel work item
+  [
+    "name" : "BindFragmentModel",
+    "parameters" : [
+      "FragmentIdentity" : new StringDataType(),
+      "ContextInformation" : new ObjectDataType(),
+  	  
+    ],
+    "results" : [
+      "result" : new StringDataType(),
+     
+    ],
+    "displayName" : "BindFragmentModel"
+  ]
+]

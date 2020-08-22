@@ -1,0 +1,87 @@
+package com.sample
+ 
+import com.sample.ContextInfo;
+import com.sample.XMLDOMHelper;
+import java.util.HashMap;
+import java.util.Map;
+
+ 
+rule "Admission Test  Self Funding  Admission Test  Manchester  Law"
+ruleflow-group "Group1"
+    when
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Admission Test" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+        //eval (true)
+        $ci : ContextInfo(abstractContainerAttrValue == "Admission Test" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law");
+        //eval (true)
+        //eval ($ci.getAbstractContainerAttrValue() == "Admission Test" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	//System.out.println( "RULE EXECUTING: " + ($ci.getAbstractContainerAttrValue() == "Admission Test" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law") );
+    	//System.out.println("the funding type: " + $map.get("Funding") );
+    	System.out.println("UNIVERSITY :" + $ci.getContextList().get("Course") );
+    	$ci.setFragFilePath("C:\\jBPM\\jbpm-installer-7.3.0.Final\\workspace\\BPPLE\\src\\main\\resources\\fragment\\AdmissionTest.bpmn2");
+        System.out.println( "fragment file path is set" );
+        
+end
+
+rule "Verify Transcript  Self Funding  Admission Test  Manchester  Law"
+ruleflow-group "Group1"
+    when
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Veryfy Transcript" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Verify Transcript" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Verify Transcript" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$ci.setFragFilePath("C:\\jBPM\\jbpm-installer-7.3.0.Final\\workspace\\BPPLE\\src\\main\\resources\\fragment\\Dumb.bpmn2");
+        System.out.println( "fragment file path is set 2" );
+        
+end
+
+rule "Transfer Credit  Admission Test  Self Funding  Admission Test  Manchester  Law"
+ruleflow-group "Group1"
+    when
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Transder Credit" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Transfer Credit" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Transfer Credit" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$ci.setFragFilePath("");
+    	$ci.setFragFilePath("C:\\jBPM\\jbpm-installer-7.3.0.Final\\workspace\\BPPLE\\src\\main\\resources\\fragment\\Dumb02.bpmn2");
+        System.out.println( "fragment file path is set 3" );
+        
+end
+
+rule "Funding  Admission Test  Self Funding  Admission Test  Manchester + Law"
+ruleflow-group "Group1"
+    when
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Funding" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Funding" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Funding" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$ci.setFragFilePath("C:\\jBPM\\jbpm-installer-7.3.0.Final\\workspace\\BPPLE\\src\\main\\resources\\fragment\\CallFragment.bpmn2");
+        System.out.println( "fragment file path is set 4" );
+        
+end
+
+rule "Tuition  Admission Test  Self Funding  Admission Test  Manchester  Law"
+ruleflow-group "Group1"
+    when
+    	//$ci : ContextInfo()
+    	//$map: Map() from (Map)$ci.getContextList();
+    	//eval ($ci.getAbstractContainerAttrValue() == "Tuition" && $map.get("Funding") == "Self Funded" && $map.get("Mode of Entry") == "Admission Test" && $map.get("University") == "UoM" && $map.get("Course") == "Law");
+    	$ci : ContextInfo(abstractContainerAttrValue == "Tuition" && contextList.get("Funding") == "Self Funded" && contextList.get("Mode of Entry") == "Admission Test" && contextList.get("University") == "UoM" && contextList.get("Course") == "Law");
+        //$ci : ContextInfo()
+        //eval ($ci.getAbstractContainerAttrValue() == "Tuition" && $ci.getContextValueByKey("Funding") == "Self Funded" && $ci.getContextValueByKey("Mode of Entry") == "Admission Test" && $ci.getContextValueByKey("University") == "UoM" && $ci.getContextValueByKey("Course") == "Law")
+    then
+    	$ci.setFragFilePath("C:\\jBPM\\jbpm-installer-7.3.0.Final\\workspace\\BPPLE\\src\\main\\resources\\fragment\\PayTuition.bpmn2");
+        System.out.println( "fragment file path is set 5" );
+        
+end

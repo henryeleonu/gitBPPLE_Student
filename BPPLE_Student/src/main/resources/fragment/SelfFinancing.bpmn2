@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.3.3.Final-v20170221-1647-B60" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_1" isCollection="false" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2" isCollection="false" structureRef="java.lang.Integer"/>
+  <bpmn2:itemDefinition id="ItemDefinition_3" isCollection="false" structureRef="java.lang.Boolean"/>
+  <bpmn2:process id="defaultPackage.SelfFinancing" tns:packageName="defaultPackage" name="SelfFinancing" isExecutable="true" processType="Private">
+    <bpmn2:property id="message" itemSubjectRef="ItemDefinition_1" name="message"/>
+    <bpmn2:startEvent id="StartEventESF_1" name="Start SelfFinancing">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Start SelfFinancing]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlowESF_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="ScriptTaskESF_1" name="Enrol in Self-Financing" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[Enrol in Self-Financing]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlowESF_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlowESF_2</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;Executing Self-Financing&quot;);
+kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+kcontext.setVariable(&quot;message&quot;, &quot;Executing Self-Financing&quot;);
+java.lang.String m = (java.lang.String)kcontext.getVariable(&quot;message&quot;);
+System.out.println(&quot;Executing Self-Financing after set : &quot; + m );
+
+//kcontext.setVariable( &quot;messageFromFragment&quot;, &quot;Executing Self-Financing&quot;);
+//kcontext.getKieRuntime().setGlobal(&quot;messageFromFragment&quot;, &quot;Executing Self-Financing&quot;);
+//java.lang.String mFF = (java.lang.String)kcontext.getVariable(&quot;messageFromFragment&quot;);
+//System.out.println(&quot;after set in fragment : &quot; + mFF );</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlowESF_1" tns:priority="1" sourceRef="StartEventESF_1" targetRef="ScriptTaskESF_1"/>
+    <bpmn2:endEvent id="EndEventESF_1" name="End SelfFinancing">
+      <bpmn2:extensionElements>
+        <tns:metaData name="elementname">
+          <tns:metaValue><![CDATA[End SelfFinancing]]></tns:metaValue>
+        </tns:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlowESF_2</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlowESF_2" tns:priority="1" sourceRef="ScriptTaskESF_1" targetRef="EndEventESF_1"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagramESF_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_ProcessESF_1" bpmnElement="defaultPackage.SelfFinancing">
+      <bpmndi:BPMNShape id="BPMNShape_StartEventESF_1" bpmnElement="StartEventESF_1">
+        <dc:Bounds height="0.0" width="0.0" x="45.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabelESF_1" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="30.0" width="55.0" x="36.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTaskESF_1" bpmnElement="ScriptTaskESF_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="100.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabelESF_1">
+          <dc:Bounds height="30.0" width="75.0" x="117.0" y="48.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEventESF_1" bpmnElement="EndEventESF_1">
+        <dc:Bounds height="36.0" width="36.0" x="230.0" y="45.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabelESF_2">
+          <dc:Bounds height="30.0" width="54.0" x="221.0" y="81.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlowESF_1" bpmnElement="SequenceFlowESF_1" sourceElement="BPMNShape_StartEventESF_1" targetElement="BPMNShape_ScriptTaskESF_1">
+        <di:waypoint xsi:type="dc:Point" x="81.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="90.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="100.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabelESF_3"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlowESF_2" bpmnElement="SequenceFlowESF_2" sourceElement="BPMNShape_ScriptTaskESF_1" targetElement="BPMNShape_EndEventESF_1">
+        <di:waypoint xsi:type="dc:Point" x="210.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="220.0" y="63.0"/>
+        <di:waypoint xsi:type="dc:Point" x="230.0" y="63.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabelESF_4"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
+      <dc:Font name="arial" size="9.0"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

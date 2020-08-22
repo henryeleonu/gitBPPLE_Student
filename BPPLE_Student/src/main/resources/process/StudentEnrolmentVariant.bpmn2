@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="ItemDefinition_4" structureRef="Object" />
+  <itemDefinition id="ItemDefinition_3" structureRef="java.lang.Boolean" />
+  <itemDefinition id="ItemDefinition_2" structureRef="java.lang.Integer" />
+  <itemDefinition id="ItemDefinition_1" structureRef="java.lang.String" />
+  <itemDefinition id="ItemDefinition_239" structureRef="Object" />
+  <itemDefinition id="ItemDefinition_960" structureRef="java.lang.Float" />
+  <itemDefinition id="ItemDefinition_430" />
+  <itemDefinition id="ItemDefinition_179" structureRef="Object" />
+  <process processType="Private" isExecutable="true" id="defaultPackage.StudentEnrolmentReferenceVariant" name="StudentEnrolmentReference" tns:packageName="defaultPackage" >
+
+    <extensionElements>
+     <tns:import name="org.kie.api.runtime.process.CaseAssignment" />
+     <tns:import name="org.kie.api.runtime.process.CaseData" />
+     <tns:global identifier="messageFromFragment" type="java.lang.Object" />
+    </extensionElements>
+    <!-- process variables -->
+    <property id="contextInfo" itemSubjectRef="ItemDefinition_430"/>
+    <property id="nameOfSubProcess" itemSubjectRef="ItemDefinition_1"/>
+    <property id="fragmentID" itemSubjectRef="ItemDefinition_1"/>
+    <property id="messageFrag" itemSubjectRef="ItemDefinition_1"/>
+
+    <!-- nodes -->
+    <startEvent id="StartEvent_1" name="StartProcess"  isInterrupting="true">
+    </startEvent>
+    <subProcess id="SubProcess_1" name="Admission Test" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable("contextInfo");
+ci.setAbstractContainerAttrValue("Admission Test");
+kcontext.setVariable("contextInfo", ci);</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEventAT_1" name="Start AT"  isInterrupting="true">
+    </startEvent>
+    <scriptTask id="ScriptTaskAT_1" name="Admission Test" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <endEvent id="EndEventAT_1" name="End AT" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEventAT_1-ScriptTaskAT_1" sourceRef="StartEventAT_1" targetRef="ScriptTaskAT_1" />
+    <sequenceFlow id="ScriptTaskAT_1-EndEventAT_1" sourceRef="ScriptTaskAT_1" targetRef="EndEventAT_1" />
+    </subProcess>
+    <subProcess id="SubProcess_2" name="Verify Transcript" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable("contextInfo");
+ci.setAbstractContainerAttrValue("Verify Transcript");
+kcontext.setVariable("contextInfo", ci);</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEventDumb_1" name="Start Dumb"  isInterrupting="true">
+    </startEvent>
+    <scriptTask id="ScriptTaskDumb_1" name="Dumb1" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("Dumb Task");</script>
+    </scriptTask>
+    <endEvent id="EndEventDumb_1" name="End Dumb" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEventDumb_1-ScriptTaskDumb_1" sourceRef="StartEventDumb_1" targetRef="ScriptTaskDumb_1" />
+    <sequenceFlow id="ScriptTaskDumb_1-EndEventDumb_1" sourceRef="ScriptTaskDumb_1" targetRef="EndEventDumb_1" />
+    </subProcess>
+    <scriptTask id="ScriptTask_1" name="Admit Candidate" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("Processing Admission");</script>
+    </scriptTask>
+    <subProcess id="SubProcess_3" name="Transfer Credit" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable("contextInfo");
+ci.setAbstractContainerAttrValue("Transfer Credit");
+kcontext.setVariable("contextInfo", ci);</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEventDumb2_1" name="Start dumb2"  isInterrupting="true">
+    </startEvent>
+    <scriptTask id="ScriptTaskDumb2_1" name="Dumb2" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <endEvent id="EndEventDumb2_1" name="End Dumb2" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEventDumb2_1-ScriptTaskDumb2_1" sourceRef="StartEventDumb2_1" targetRef="ScriptTaskDumb2_1" />
+    <sequenceFlow id="ScriptTaskDumb2_1-EndEventDumb2_1" sourceRef="ScriptTaskDumb2_1" targetRef="EndEventDumb2_1" />
+    </subProcess>
+    <subProcess id="SubProcess_4" name="Funding" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable("contextInfo");
+ci.setAbstractContainerAttrValue("Funding");
+kcontext.setVariable("contextInfo", ci);</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEvent_1Frag" name="StartProcess"  isInterrupting="true">
+    </startEvent>
+    <scriptTask id="ScriptTask_1Frag" name="Script Task 1" scriptFormat="http://www.java.com/java" >
+      <script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+</script>
+    </scriptTask>
+    <businessRuleTask id="BusinessRuleTask_1Frag" name="Business Rule Task 1" g:ruleFlowGroup="Group2" 
+ implementation="http://www.jboss.org/drools/rule" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+System.out.println("executing business rules");</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </businessRuleTask>
+    <task id="Task_1Frag" name="BindFragmentModel" tns:taskName="BindFragmentModel" >
+      <ioSpecification>
+        <dataInput id="Task_1Frag_FragmentIdentityInput" name="FragmentIdentity" />
+        <dataInput id="Task_1Frag_ContextInformationInput" name="ContextInformation" />
+        <dataInput id="Task_1Frag_input_fragIDInput" name="input_fragID" />
+        <dataInput id="Task_1Frag_input_cInfoInput" name="input_cInfo" />
+        <dataOutput id="Task_1Frag_resultOutput" name="result" />
+        <inputSet>
+          <dataInputRefs>Task_1Frag_FragmentIdentityInput</dataInputRefs>
+          <dataInputRefs>Task_1Frag_ContextInformationInput</dataInputRefs>
+          <dataInputRefs>Task_1Frag_input_fragIDInput</dataInputRefs>
+          <dataInputRefs>Task_1Frag_input_cInfoInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>Task_1Frag_resultOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>fragmentID</sourceRef>
+        <targetRef>Task_1Frag_FragmentIdentityInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>contextInfo</sourceRef>
+        <targetRef>Task_1Frag_ContextInformationInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>fragmentID</sourceRef>
+        <targetRef>Task_1Frag_input_fragIDInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>contextInfo</sourceRef>
+        <targetRef>Task_1Frag_input_cInfoInput</targetRef>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>Task_1Frag_resultOutput</sourceRef>
+        <targetRef>messageFrag</targetRef>
+      </dataOutputAssociation>
+    </task>
+    <endEvent id="EndEvent_1Frag" name="End Event 1Frag" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEvent_1Frag-ScriptTask_1Frag" sourceRef="StartEvent_1Frag" targetRef="ScriptTask_1Frag" />
+    <sequenceFlow id="ScriptTask_1Frag-BusinessRuleTask_1Frag" sourceRef="ScriptTask_1Frag" targetRef="BusinessRuleTask_1Frag" />
+    <sequenceFlow id="BusinessRuleTask_1Frag-Task_1Frag" sourceRef="BusinessRuleTask_1Frag" targetRef="Task_1Frag" />
+    <sequenceFlow id="Task_1Frag-EndEvent_1Frag" sourceRef="Task_1Frag" targetRef="EndEvent_1Frag" />
+    </subProcess>
+    <subProcess id="SubProcess_5" name="Tuition" >
+      <extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script>kcontext.getKieRuntime().insert(kcontext.getProcessInstance());
+com.sample.ContextInfo ci = (com.sample.ContextInfo)kcontext.getVariable("contextInfo");
+ci.setAbstractContainerAttrValue("Tuition");
+kcontext.setVariable("contextInfo", ci);</tns:script>
+        </tns:onEntry-script>
+      </extensionElements>
+    <!-- nodes -->
+    <startEvent id="StartEventPT_1" name="Start PT"  isInterrupting="true">
+    </startEvent>
+    <scriptTask id="ScriptTaskPT_1" name="Pay Tuition" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <endEvent id="EndEventPT_1" name="End PT" />
+
+    <!-- connections -->
+    <sequenceFlow id="StartEventPT_1-ScriptTaskPT_1" sourceRef="StartEventPT_1" targetRef="ScriptTaskPT_1" />
+    <sequenceFlow id="ScriptTaskPT_1-EndEventPT_1" sourceRef="ScriptTaskPT_1" targetRef="EndEventPT_1" />
+    </subProcess>
+    <scriptTask id="ScriptTask_2" name="Issue ID Number" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("issuing ID what is this ?");</script>
+    </scriptTask>
+    <endEvent id="EndEvent_2" name="EndProcess" />
+    <scriptTask id="ScriptTask_3" name="Submit Application" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <scriptTask id="ScriptTask_4" name="Submit Documents" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <scriptTask id="ScriptTask_5" name="Register" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("");</script>
+    </scriptTask>
+    <task id="Task_1" name="PauseNode" tns:taskName="PauseNode" >
+      <ioSpecification>
+        <inputSet>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+    </task>
+
+    <!-- connections -->
+    <sequenceFlow id="StartEvent_1-SubProcess_1" sourceRef="StartEvent_1" targetRef="SubProcess_1" />
+    <sequenceFlow id="ScriptTask_3-SubProcess_2" sourceRef="ScriptTask_3" targetRef="SubProcess_2" />
+    <sequenceFlow id="SubProcess_2-ScriptTask_1" sourceRef="SubProcess_2" targetRef="ScriptTask_1" />
+    <sequenceFlow id="ScriptTask_1-SubProcess_3" sourceRef="ScriptTask_1" targetRef="SubProcess_3" />
+    <sequenceFlow id="Task_1-SubProcess_4" sourceRef="Task_1" targetRef="SubProcess_4" />
+    <sequenceFlow id="ScriptTask_4-SubProcess_5" sourceRef="ScriptTask_4" targetRef="SubProcess_5" />
+    <sequenceFlow id="ScriptTask_5-ScriptTask_2" sourceRef="ScriptTask_5" targetRef="ScriptTask_2" />
+    <sequenceFlow id="ScriptTask_2-EndEvent_2" sourceRef="ScriptTask_2" targetRef="EndEvent_2" />
+    <sequenceFlow id="SubProcess_1-ScriptTask_3" sourceRef="SubProcess_1" targetRef="ScriptTask_3" />
+    <sequenceFlow id="SubProcess_4-ScriptTask_4" sourceRef="SubProcess_4" targetRef="ScriptTask_4" />
+    <sequenceFlow id="SubProcess_5-ScriptTask_5" sourceRef="SubProcess_5" targetRef="ScriptTask_5" />
+    <sequenceFlow id="SubProcess_3-Task_1" sourceRef="SubProcess_3" targetRef="Task_1" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="defaultPackage.StudentEnrolmentReferenceVariant" >
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" >
+        <dc:Bounds x="50" y="129" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcess_1" >
+        <dc:Bounds x="112" y="79" width="279" height="92" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEventAT_1" >
+        <dc:Bounds x="126" y="100" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTaskAT_1" >
+        <dc:Bounds x="179" y="99" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEventAT_1" >
+        <dc:Bounds x="304" y="100" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcess_2" >
+        <dc:Bounds x="660" y="0" width="395" height="163" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEventDumb_1" >
+        <dc:Bounds x="674" y="21" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTaskDumb_1" >
+        <dc:Bounds x="815" y="20" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEventDumb_1" >
+        <dc:Bounds x="993" y="21" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_1" >
+        <dc:Bounds x="1100" y="79" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcess_3" >
+        <dc:Bounds x="790" y="256" width="395" height="115" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEventDumb2_1" >
+        <dc:Bounds x="804" y="277" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTaskDumb2_1" >
+        <dc:Bounds x="951" y="276" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEventDumb2_1" >
+        <dc:Bounds x="1123" y="277" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcess_4" >
+        <dc:Bounds x="10" y="253" width="661" height="138" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1Frag" >
+        <dc:Bounds x="24" y="274" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_1Frag" >
+        <dc:Bounds x="105" y="273" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="BusinessRuleTask_1Frag" >
+        <dc:Bounds x="285" y="273" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_1Frag" >
+        <dc:Bounds x="448" y="280" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_1Frag" >
+        <dc:Bounds x="609" y="281" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SubProcess_5" >
+        <dc:Bounds x="249" y="442" width="303" height="123" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEventPT_1" >
+        <dc:Bounds x="263" y="463" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTaskPT_1" >
+        <dc:Bounds x="321" y="462" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEventPT_1" >
+        <dc:Bounds x="445" y="463" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_2" >
+        <dc:Bounds x="670" y="582" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_2" >
+        <dc:Bounds x="701" y="667" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_3" >
+        <dc:Bounds x="480" y="102" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_4" >
+        <dc:Bounds x="30" y="533" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ScriptTask_5" >
+        <dc:Bounds x="660" y="484" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_1" >
+        <dc:Bounds x="551" y="183" width="110" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="StartEventAT_1-ScriptTaskAT_1" >
+        <di:waypoint x="38" y="45" />
+        <di:waypoint x="150" y="89" />
+        <di:waypoint x="234" y="89" />
+        <di:waypoint x="234" y="99" />
+        <di:waypoint x="122" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTaskAT_1-EndEventAT_1" >
+        <di:waypoint x="122" y="45" />
+        <di:waypoint x="252" y="89" />
+        <di:waypoint x="328" y="89" />
+        <di:waypoint x="328" y="96" />
+        <di:waypoint x="328" y="106" />
+        <di:waypoint x="216" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="StartEventDumb_1-ScriptTaskDumb_1" >
+        <di:waypoint x="38" y="45" />
+        <di:waypoint x="698" y="10" />
+        <di:waypoint x="870" y="10" />
+        <di:waypoint x="870" y="20" />
+        <di:waypoint x="210" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTaskDumb_1-EndEventDumb_1" >
+        <di:waypoint x="210" y="45" />
+        <di:waypoint x="962" y="45" />
+        <di:waypoint x="999" y="45" />
+        <di:waypoint x="357" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="StartEventDumb2_1-ScriptTaskDumb2_1" >
+        <di:waypoint x="38" y="45" />
+        <di:waypoint x="828" y="266" />
+        <di:waypoint x="1006" y="266" />
+        <di:waypoint x="1006" y="276" />
+        <di:waypoint x="216" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTaskDumb2_1-EndEventDumb2_1" >
+        <di:waypoint x="216" y="45" />
+        <di:waypoint x="1095" y="301" />
+        <di:waypoint x="1129" y="301" />
+        <di:waypoint x="357" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="StartEvent_1Frag-ScriptTask_1Frag" >
+        <di:waypoint x="38" y="45" />
+        <di:waypoint x="85" y="298" />
+        <di:waypoint x="105" y="298" />
+        <di:waypoint x="150" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_1Frag-BusinessRuleTask_1Frag" >
+        <di:waypoint x="150" y="45" />
+        <di:waypoint x="250" y="298" />
+        <di:waypoint x="285" y="298" />
+        <di:waypoint x="330" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="BusinessRuleTask_1Frag-Task_1Frag" >
+        <di:waypoint x="330" y="45" />
+        <di:waypoint x="421" y="298" />
+        <di:waypoint x="421" y="305" />
+        <di:waypoint x="448" y="305" />
+        <di:waypoint x="493" y="52" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Task_1Frag-EndEvent_1Frag" >
+        <di:waypoint x="493" y="52" />
+        <di:waypoint x="503" y="340" />
+        <di:waypoint x="633" y="340" />
+        <di:waypoint x="633" y="323" />
+        <di:waypoint x="623" y="52" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="StartEventPT_1-ScriptTaskPT_1" >
+        <di:waypoint x="38" y="45" />
+        <di:waypoint x="313" y="487" />
+        <di:waypoint x="321" y="487" />
+        <di:waypoint x="127" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTaskPT_1-EndEventPT_1" >
+        <di:waypoint x="127" y="45" />
+        <di:waypoint x="441" y="487" />
+        <di:waypoint x="451" y="487" />
+        <di:waypoint x="220" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="StartEvent_1-SubProcess_1" >
+        <di:waypoint x="74" y="153" />
+        <di:waypoint x="74" y="125" />
+        <di:waypoint x="112" y="125" />
+        <di:waypoint x="251" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_3-SubProcess_2" >
+        <di:waypoint x="535" y="127" />
+        <di:waypoint x="535" y="81" />
+        <di:waypoint x="660" y="81" />
+        <di:waypoint x="857" y="81" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcess_2-ScriptTask_1" >
+        <di:waypoint x="857" y="81" />
+        <di:waypoint x="1077" y="81" />
+        <di:waypoint x="1077" y="104" />
+        <di:waypoint x="1100" y="104" />
+        <di:waypoint x="1155" y="104" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_1-SubProcess_3" >
+        <di:waypoint x="1155" y="104" />
+        <di:waypoint x="1155" y="192" />
+        <di:waypoint x="1053" y="192" />
+        <di:waypoint x="1053" y="256" />
+        <di:waypoint x="987" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Task_1-SubProcess_4" >
+        <di:waypoint x="606" y="208" />
+        <di:waypoint x="340" y="208" />
+        <di:waypoint x="340" y="253" />
+        <di:waypoint x="340" y="322" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_4-SubProcess_5" >
+        <di:waypoint x="85" y="558" />
+        <di:waypoint x="85" y="503" />
+        <di:waypoint x="249" y="503" />
+        <di:waypoint x="400" y="503" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_5-ScriptTask_2" >
+        <di:waypoint x="715" y="509" />
+        <di:waypoint x="715" y="558" />
+        <di:waypoint x="725" y="558" />
+        <di:waypoint x="725" y="582" />
+        <di:waypoint x="725" y="607" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="ScriptTask_2-EndEvent_2" >
+        <di:waypoint x="725" y="607" />
+        <di:waypoint x="725" y="652" />
+        <di:waypoint x="725" y="673" />
+        <di:waypoint x="725" y="691" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcess_1-ScriptTask_3" >
+        <di:waypoint x="251" y="125" />
+        <di:waypoint x="435" y="125" />
+        <di:waypoint x="435" y="118" />
+        <di:waypoint x="480" y="118" />
+        <di:waypoint x="535" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcess_4-ScriptTask_4" >
+        <di:waypoint x="340" y="322" />
+        <di:waypoint x="0" y="322" />
+        <di:waypoint x="0" y="558" />
+        <di:waypoint x="30" y="558" />
+        <di:waypoint x="85" y="558" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcess_5-ScriptTask_5" >
+        <di:waypoint x="400" y="503" />
+        <di:waypoint x="606" y="503" />
+        <di:waypoint x="606" y="500" />
+        <di:waypoint x="660" y="500" />
+        <di:waypoint x="715" y="509" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SubProcess_3-Task_1" >
+        <di:waypoint x="987" y="313" />
+        <di:waypoint x="921" y="208" />
+        <di:waypoint x="661" y="208" />
+        <di:waypoint x="606" y="208" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
